@@ -16,25 +16,11 @@ mongoose.set('strictQuery', true);
 mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Conectado a MongoDB'))
     .catch(err => console.error('Error al conectar a MongoDB:', err));
+
     
 app.use(cors());
 app.use(express.json());
 
-/* app.get('/api/usuarios', (req, res) => {
-    // Llamas a la base de datos para pedir nombres de usuario
-
-    // Devuelvo un formato ESTÁNDAR (json)
-    //const usuarios = llamadaBD(query);
-    const usuarios = {
-        listaUsuarios: [
-            {nombre: 'Pedro', email: 'pedro@example.com'},
-            {nombre: 'Alonso', email: 'alonso@example.com'},
-            {nombre: 'Carlos', email: 'carlos@example.com'},
-        ]
-    };
-    
-    res.json(usuarios);
-}); */
 
 // Rutas
 app.use('/api/students', studentRoutes); // Rutas de estudiantes
