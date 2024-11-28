@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const studentRoutes = require('./routes/RouteStudent');
 const taskRoutes = require('./routes/RouteTask');
 const studentTaskRoutes = require('./routes/RouteStudentTask');
-const menuRoutes = require('./routes/RouteMenu');
+const adminRoutes = require('./routes/RouteAdmin');
+const teacherRoutes = require('./routes/RouteTeacher');
 
 const app = express();
 const PORT = 3000;
@@ -21,12 +22,12 @@ mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 app.use(cors());
 app.use(express.json());
 
-
 // Rutas
-app.use('/api/students', studentRoutes); // Rutas de estudiantes
-app.use('/api/tasks', taskRoutes);       // Rutas de tareas
-app.use('/api/student-tasks', studentTaskRoutes); // Rutas de relaciones estudiante-tarea
-app.use('/api/menus', menuRoutes);       // Rutas de menús
+app.use('/api/students', studentRoutes);
+app.use('/api/tasks', taskRoutes);
+app.use('/api/student-tasks', studentTaskRoutes);
+app.use('/api/teachers', teacherRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.post('/api/login', (req, res) => {
     const { email, password } = req.body;
@@ -39,11 +40,13 @@ app.post('/api/login', (req, res) => {
     ];
 
     const admin = administradores.find((a) => a.email === email && a.password === password);
+    //const profesor = profesores.find((b) => b.email === email && b.password === password);
 
     if (admin) {
-        res.json({ success: true, message: 'Inicio de sesión correcto' });
+        res.json({ success: true, role: 'admin', message: 'Inicio de sesión correcto' });
     } else {
-        res.status(401).json({ success: false, message: 'Correo o contraseña incorrectos' });
+        //res.status(401).json({ invalid: true, incorrectTimes: 0, message: 'Correo o contraseña incorrectos' });
+        res.status(401).json({ succes: false, message: 'Correo o contraseña incorrectos' });
     }
 });
 

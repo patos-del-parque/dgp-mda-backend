@@ -3,13 +3,16 @@ const Task = require('../models/Task');
 const router = express.Router();
 
 // Añadir una tarea nueva
-router.post('/add-task', async (req, res) => {
+router.post('/add', async (req, res) => {
     try {
+
+        const { nombre, fechaCreacion,imagenTarea, pasos } = req.body;
+
         const newTask = new Task({
-            nombre: req.body.nombre,
-            descripcion: req.body.descripcion,
-            pasos: req.body.pasos,
-            fechaCreacion: new Date(), // Se puede omitir
+            nombre ,
+            fechaCreacion: new Date(fechaCreacion), // Se puede omitir
+            imagenTarea,
+            pasos,
         });
         
         await newTask.save(); 
@@ -20,7 +23,7 @@ router.post('/add-task', async (req, res) => {
 });
 
 // Obtener todas las tareas
-router.get('/get-tasks', async (req, res) => {
+router.get('/get', async (req, res) => {
     try {
         const tasks = await Task.find();
         res.status(200).json({ tasks });
@@ -30,7 +33,7 @@ router.get('/get-tasks', async (req, res) => {
 });
 
 // Obtener una tarea por su ID
-router.get('/get-task/:taskId', async (req, res) => {
+router.get('/get/:taskId', async (req, res) => {
     try {
         const task = await Task.findById(req.params.taskId);
 
@@ -45,7 +48,7 @@ router.get('/get-task/:taskId', async (req, res) => {
 });
 
 // Actualizar una tarea por su ID
-router.put('/update-task/:taskId', async (req, res) => {
+router.put('/update/:taskId', async (req, res) => {
     try {
         const updatedTask = await Task.findByIdAndUpdate(
             req.params.taskId,
@@ -68,7 +71,7 @@ router.put('/update-task/:taskId', async (req, res) => {
 });
 
 // Eliminar una tarea por su ID
-router.delete('/delete-task/:taskId', async (req, res) => {
+router.delete('/delete/:taskId', async (req, res) => {
     try {
         const deletedTask = await Task.findByIdAndDelete(req.params.taskId);
 

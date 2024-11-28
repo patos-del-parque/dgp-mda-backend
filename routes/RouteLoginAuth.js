@@ -13,11 +13,8 @@ router.post('/add-student', async (req, res) => {
     try {
         const newStudent = new Student({
             nombre: req.body.nombre,
-            apellidos: req.body.apellidos,
-            DNI: req.body.DNI,
-            curso: req.body.curso,
-            edad: req.body.edad,
-            niveles: req.body.niveles,
+            aula: req.body.aula,
+            tipo_vista: req.body.tipo_vista,
             password: req.body.password,
         });
 
