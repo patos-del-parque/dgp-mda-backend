@@ -2,14 +2,13 @@ const mongoose = require('mongoose');
 
 
 const materialSquema = new mongoose.Schema({
-    nombre: {type: String, requiered: True},
-    cantidad: {type: Number, requiered: True}, 
+    nombre: {type: String, requiered: true},
+    cantidad: {type: Number, requiered: true},
+    imagen: {type: String, requiered: true}, 
 })
 
-const materialsSchema = new mongoose.Schema({
-  material: [materialSquema],
-});
 
-const Materials = mongoose.model('Materials', materialsSchema);
+
+const Materials = mongoose.model('Materials', materialSquema);
 
 module.exports = Materials;

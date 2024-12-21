@@ -14,6 +14,10 @@ const studentTaskSchema = new mongoose.Schema({
     realizada: { 
         type: Boolean, 
         default: false
+    },
+    tipoVista: {
+        type: String,
+        required: true
     }
 });
 

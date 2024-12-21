@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 //Esquema de los pasos de la tarea
 const StepSchema = new mongoose.Schema({
-    name: { type: String, requiered: true},
+    name: { type: String, required: true},
     description: { type: String, required: true },
     imageUri: { type: String, required: false }, // Opcional
     /* videoUri: { type: String, required: false },  */// Opcional
@@ -13,7 +13,7 @@ const StepSchema = new mongoose.Schema({
 const taskSchema = new mongoose.Schema({
     nombre: { type: String, required: true }, 
     fechaCreacion: { type: Date, default: Date.now },
-    imagenTarea: { type: String, required: true }, 
+    imagenTarea: { type: String, required: false }, 
     pasos: [StepSchema],
 });
 
